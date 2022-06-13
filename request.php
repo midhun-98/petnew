@@ -121,7 +121,7 @@ $query=mysqli_query($conn,"SELECT * FROM request_tb join register_tb on request_
                                             <td><?php echo $row['id'];?></td>
                                             <td><?php echo $row['login_id'];?></td>
                                             <td><?php echo $row['name'];?></td>
-                                            <td><a href="acceptrequest.php?update_id=<?php echo $row['login_id'];?>"><span class="badge badge-success">Accept</span></a>
+                                            <td><a href="acceptrequest.php?update_id=<?php echo $row['request_id'];?>"><span class="badge badge-success">Accept</span></a>
                                             <a href="deleterequest.php?delete_id=<?php echo $row['request_id'];?>"><span class="badge badge-danger">Delete</span></a></td>                       
                                             </tr>
                                         </tbody>

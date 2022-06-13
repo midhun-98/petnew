@@ -5,7 +5,7 @@
                 <div class="logo"><a href="index.html">
                         <!-- <img src="assets/images/logo.png" alt="" /> --><span>PET SPOTTER</span></a></div>
                
-                        <li><a href="index.php"><i class="ti-home"></i> Dashboard <span
+                        <li><a href="dashboard.php"><i class="ti-home"></i> Dashboard <span
                             class="sidebar-collapse-icon ti-angle-down"></span></a></li>
                             <?php
                             if($_SESSION['type']=='admin')
@@ -14,6 +14,7 @@
                             <li><a href="viewpets.php"><i class="fa fa-paw"></i>View Pets</a></li>
                             <li><a href="viewvendors.php"><i class="fa fa-address-card"></i>Registerd Vendors</a></li>
                             <li><a href="managevendor.php"><i class="ti-view-list-alt"></i>Manage Requests</a></li>
+                            <li><a href="add_vetinary.php"><i class="fa fa-user-md"></i>Add Vetinary</a></li>
                 <!-- <li class="label">Apps</li>
                 <li><a href="addpets.php"><i class="ti-view-list-alt"></i>Add Pets</a></li>
                 <li><a class="sidebar-sub-toggle"><i class="ti-bar-chart-alt"></i> Charts <span
@@ -58,7 +59,10 @@
                     ?>
                      <li><a href="addpets.php"><i class="fa fa-plus"></i>Add Pets</a></li>
                      <li><a href="viewvendorpets.php"><i class="fa fa-paw"></i>View Pets</a></li>
-                     <li><a href="request.php"><i class="ti-view-list-alt"></i>Requests</a></li>
+                     <li><a href="add_product.php"><i class="fa fa-plus"></i>Add Product</a></li>
+                     <li><a href="view_product.php"><i class="fa fa-shopping-basket"></i>View Product</a></li>
+                     <li><a href="request.php"><i class="ti-view-list-alt"></i>Pet Requests</a></li>
+                     <li><a href="product_request.php"><i class="ti-view-list-alt"></i>Product Requests</a></li>
                      <!-- <li><a href="editpets.php"><i class="ti-view-list-alt"></i>Edit Pets</a></li> -->
                 <!-- <li><a class="sidebar-sub-toggle"><i class="ti-panel"></i> Components <span
                             class="sidebar-collapse-icon ti-angle-down"></span></a>
@@ -124,6 +128,15 @@
                 <?php
                 }
                 ?>
+                 <?php
+                if($_SESSION['type']=='vetinary')
+                {
+                ?>
+                     <li><a href="add_doctor.php"><i class="fa fa-user-md"></i>Add Doctor</a></li>
+                     <li><a href="view_doctor.php"><i class="fa fa-user"></i>View Doctor</a></li>
+                     <?php
+                     }
+                     ?>
                 <li><a href="logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
                
             </ul>

@@ -1,8 +1,7 @@
 <?php
 session_start();
-$id=$_SESSION['id'];
 include 'conn.php';
-$query=mysqli_query($conn,"SELECT * FROM pet_tb where login_id='$id'");
+$query=mysqli_query($conn,"SELECT * FROM doctor_tb");
 ?>
 
 
@@ -80,7 +79,7 @@ $query=mysqli_query($conn,"SELECT * FROM pet_tb where login_id='$id'");
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>VIEW PETS</h1>
+                                <h1>Doctors</h1>
                             </div>
                         </div>
                     </div>
@@ -89,8 +88,7 @@ $query=mysqli_query($conn,"SELECT * FROM pet_tb where login_id='$id'");
                         <div class="page-header">
                             <div class="page-title">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Dashboard/View Pets</a></li>
-                                   
+                                    <li class="breadcrumb-item"><a href="#">Dashboard/Registerd doctors</a></li>
                                 </ol>
                             </div>
                         </div>
@@ -99,78 +97,46 @@ $query=mysqli_query($conn,"SELECT * FROM pet_tb where login_id='$id'");
                 </div>
                 <!-- /# row -->
                 <section id="main-content">
-                    <form method="POST">
                 <div class="row">
-                        <div class="col-lg-12">
-                           
-
-                        <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-title">
-                                    <h4>View Pets </h4>
-                                    
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover ">
-                                            <thead>
-                                                <tr>
-                                                    <!-- <th>Name</th> -->
-                                                    <!-- <th>Contact</th>
-                                                    <th>Price</th>
-                                                    <th>Images</th> -->
-                                                </tr>
-                                            </thead>
-                                                <?php
-                                                while ($row=mysqli_fetch_assoc($query))
-                                                {
-                                                ?>
-                                            <tbody>
-                                                <tr>
-                                                <td><?php echo $row['owner_name'];?><br>
-
-                                                Mob :<?php echo $row['mobile'];?><br>
-
-                                                Place:<?php echo $row['address'];?><br>
-
-                                                Category :<?php echo $row['category'];?><br>
-
-                                                Breed :<?php echo $row['breed'];?><br>
-
-                                                Age:<?php echo $row['age'];?><br>
-
-                                                Colour:<?php echo $row['colour'];?><br>
-
-                                                Sex:<?php echo $row['sex'];?><br>
-
-                                                Title :<?php echo $row['title'];?><br>
-                                                
-                                                Information:<?php echo $row['information'];?><br>
-
-                                                Price :<?php echo $row['price'];?><br>
-                                               
-                                                <?php if($row['status'] == 'Pending'){?>
-                                                       <b style="color:green" ><?php echo $row['status'];?></b>
-                                                       <?php } 
-                                                       else{?><b style="color:red" ><?php echo $row['status'];?></b>
-                                                       <?php } ?>
-                                                 </td>
-                                                <td><img src="images/gallery/<?php echo $row['image']; ?>" height="130px" width="160px"><br>
-                                            </td>
-                                                </tr>
-                                            </tbody>
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="bootstrap-data-table-panel">
+                                <div class="table-responsive">
+                                    <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Qualification</th>
+                                                <th>Experience</th>
+                                                <th>Latitude</th>
+                                                <th>Longitude</th>
+                                            </tr>
+                                        </thead>
                                             <?php
-                                                }
-                                                ?>
-                                        </table>
-                                    </div>
+                                            while ($row=mysqli_fetch_assoc($query))
+                                            {
+                                            ?>
+                                        <tbody>
+                                            <tr>
+                                            <td><?php echo $row['name'];?></td>
+                                            <td><?php echo $row['qualification'];?></td>
+                                            <td><?php echo $row['experience'];?></td>
+                                            <td><?php echo $row['lattitude'];?></td>
+                                            <td><?php echo $row['longitude'];?></td>
+                                            </tr>
+                                        </tbody>
+                                        <?php
+                                            }
+                                            ?>
+                                    </table>
                                 </div>
                             </div>
-                            <!-- /# card -->
                         </div>
-
-    </form>
-    </section>
+                        <!-- /# card -->
+                    </div>
+                    <!-- /# column -->
+                </div>
+            </section>
     </div>
     </div>
 

@@ -1,11 +1,25 @@
+
 <?php
 session_start();
-$id=$_SESSION['id'];
 include 'conn.php';
-$query=mysqli_query($conn,"SELECT * FROM pet_tb where login_id='$id'");
+ if(isset($_POST['subm']))
+ {
+    $name=$_POST['name'];
+    $qual=$_POST['qualification'];
+    $exp=$_POST['experience'];
+    $lat=$_POST['lattitude'];
+    $long=$_POST['longitude'];
+    $user=$_POST['username'];
+    $pass=$_POST['password'];
+
+    mysqli_query($conn,"INSERT INTO login_tb(username,password,type,status) VALUES ('$user','$pass','vetinary','1')");
+	$id=mysqli_insert_id($conn);
+    
+    mysqli_query($conn,"INSERT INTO doctor_tb(name,qualification,experience,lattitude,longitude) VALUES ('$name','$qual','$exp','$lat','$long')");
+    	
+		header('location:dashboard.php');
+}
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,7 +94,7 @@ $query=mysqli_query($conn,"SELECT * FROM pet_tb where login_id='$id'");
                     <div class="col-lg-8 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>VIEW PETS</h1>
+                                <h1>PET SPOTTER</h1>
                             </div>
                         </div>
                     </div>
@@ -89,7 +103,7 @@ $query=mysqli_query($conn,"SELECT * FROM pet_tb where login_id='$id'");
                         <div class="page-header">
                             <div class="page-title">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">Dashboard/View Pets</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Dashboard/Add Pets</a></li>
                                    
                                 </ol>
                             </div>
@@ -99,76 +113,72 @@ $query=mysqli_query($conn,"SELECT * FROM pet_tb where login_id='$id'");
                 </div>
                 <!-- /# row -->
                 <section id="main-content">
-                    <form method="POST">
+                    <form method="POST"  enctype="multipart/form-data">
                 <div class="row">
                         <div class="col-lg-12">
-                           
-
-                        <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-title">
-                                    <h4>View Pets </h4>
+                                    <h4>ADD DOCTOR</h4>
                                     
                                 </div>
                                 <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-hover ">
-                                            <thead>
-                                                <tr>
-                                                    <!-- <th>Name</th> -->
-                                                    <!-- <th>Contact</th>
-                                                    <th>Price</th>
-                                                    <th>Images</th> -->
-                                                </tr>
-                                            </thead>
-                                                <?php
-                                                while ($row=mysqli_fetch_assoc($query))
-                                                {
-                                                ?>
-                                            <tbody>
-                                                <tr>
-                                                <td><?php echo $row['owner_name'];?><br>
+                                    <div class="basic-elements">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                        <input type="hidden" class="form-control"  name="login_id" value="<?php echo($login_id);?>">               
+                                                    <div class="form-group">
+                                                        <label>Doctor Name</label>
+                                                        <input type="text" class="form-control" placeholder="Name" name="name" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Qualification</label>
+                                                        <input class="form-control" type="text" placeholder="Qualification" name="qualification" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Experience</label>
+                                                        <input class="form-control" type="text" placeholder="Experience" name="experience" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Lattitude</label>
+                                                        <input class="form-control" type="text" placeholder="Lattitude" name="lattitude" required>
+                                                    </div>
+                                                    </div>     
+                                                    <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Longitude</label>
+                                                        <input class="form-control" type="text" placeholder="Longitude" name="longitude" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Username</label>
+                                                        <input class="form-control" type="text" placeholder="Username" name="username" required>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Password</label>
+                                                        <input class="form-control" type="text" placeholder="Password" name="password" required>
+                                                    </div>
+                                                        
 
-                                                Mob :<?php echo $row['mobile'];?><br>
+                                                    <div class="form-group">
+                                                <div class="col-sm-offset-2 col-sm-10" >
+                                                    <button type="submit" class="btn btn-default" name="subm">ADD</button>
+                                                </div>
+                                            </div>
 
-                                                Place:<?php echo $row['address'];?><br>
-
-                                                Category :<?php echo $row['category'];?><br>
-
-                                                Breed :<?php echo $row['breed'];?><br>
-
-                                                Age:<?php echo $row['age'];?><br>
-
-                                                Colour:<?php echo $row['colour'];?><br>
-
-                                                Sex:<?php echo $row['sex'];?><br>
-
-                                                Title :<?php echo $row['title'];?><br>
-                                                
-                                                Information:<?php echo $row['information'];?><br>
-
-                                                Price :<?php echo $row['price'];?><br>
-                                               
-                                                <?php if($row['status'] == 'Pending'){?>
-                                                       <b style="color:green" ><?php echo $row['status'];?></b>
-                                                       <?php } 
-                                                       else{?><b style="color:red" ><?php echo $row['status'];?></b>
-                                                       <?php } ?>
-                                                 </td>
-                                                <td><img src="images/gallery/<?php echo $row['image']; ?>" height="130px" width="160px"><br>
-                                            </td>
-                                                </tr>
-                                            </tbody>
-                                            <?php
-                                                }
-                                                ?>
-                                        </table>
+                
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                            <!-- /# card -->
-                        </div>
+                       </div>
+                
+        <!-- <div class="pet">
 
+                   <h1><b>PET SPOTTER</b></h1>
+              </div> -->
+    </div>
     </form>
     </section>
     </div>

@@ -17,7 +17,7 @@ if(isset($_POST['subm']))
 		$_SESSION['type']=$row['type'];
 		$_SESSION['logedin']=TRUE;
 		
-		header('location:index.php');
+		header('location:dashboard.php');
 	}
 	else
 	{
